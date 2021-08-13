@@ -1,16 +1,24 @@
--- Find employees birthdays
+-- Find employees birthdays (1952-1955)
 SELECT first_name, last_name
 FROM employees
 WHERE birth_date BETWEEN '1952-01-01' AND '1955-12-31';
+
+-- Find employees birthdays (1952)
 SELECT first_name, last_name
 FROM employees
 WHERE birth_date BETWEEN '1952-01-01' AND '1952-12-31';
+
+-- Find employees birthdays (1953)
 SELECT first_name, last_name
 FROM employees
 WHERE birth_date BETWEEN '1953-01-01' AND '1953-12-31';
+
+-- Find employees birthdays (1954)
 SELECT first_name, last_name
 FROM employees
 WHERE birth_date BETWEEN '1954-01-01' AND '1954-12-31';
+
+-- Find employees birthdays (1955)
 SELECT first_name, last_name
 FROM employees
 WHERE birth_date BETWEEN '1955-01-01' AND '1955-12-31';
@@ -21,30 +29,31 @@ FROM employees
 WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 
--- Number of employees retiring
+-- Count the number of employees retiring
 SELECT COUNT(first_name)
 FROM employees
 WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 
+-- Put the number of emplyees retiring into a table
 SELECT first_name, last_name
 INTO retirement_info
 FROM employees
 WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 
+-- Retrieve/Drop Table
 SELECT * FROM retirement_info;
-
 DROP TABLE retirement_info;
 
--- Create new table for retiring employees
+-- Create new table for retiring employees that includes employee number
 SELECT emp_no, first_name, last_name
 INTO retirement_info
 FROM employees
 WHERE (birth_date BETWEEN '1952-01-01' AND '1955-12-31')
 AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 
--- Check the table
+-- Retrieve/Drop Table
 SELECT * FROM retirement_info;
 
 -- Joining departments and dept_manager tables
@@ -110,6 +119,7 @@ LEFT JOIN dept_employees as de
 ON ce.emp_no = de.emp_no
 GROUP BY de.dept_no
 
+-- Retrieve/Drop Table
 SELECT * FROM salaries
 ORDER BY to_date DESC;  
 	
@@ -126,7 +136,7 @@ AND (hire_date BETWEEN '1985-01-01' AND '1988-12-31');
 -- Join emp_info to salaries
 SELECT e.emp_no,
     e.first_name,
-e.last_name,
+    e.last_name,
     e.gender,
     s.salary,
     de.to_date
@@ -181,6 +191,7 @@ INNER JOIN departments as d
 ON (de.dept_no = d.dept_no)
 WHERE d.dept_name = ('Sales');
 
+-- Retrieve/Drop Table
 SELECT * FROM retirees_sales;	
 
 --LIST of retiring employees in sales and development departments
@@ -196,4 +207,5 @@ INNER JOIN departments as d
 ON (de.dept_no = d.dept_no)
 WHERE d.dept_name IN ('Sales','Development');
 
+-- Retrieve/Drop Table
 SELECT * FROM retirees_sales_devpmt;

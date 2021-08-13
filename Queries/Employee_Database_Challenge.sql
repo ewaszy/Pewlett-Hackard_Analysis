@@ -44,6 +44,22 @@ ORDER BY COUNT(title) DESC;
 SELECT * FROM retiring_titles
 DROP TABLE retiring_titles
 
--- Table does not come out right
--- Need to ask for help
-	
+-- My table is right; example picture in instructions is wrong
+
+-- Deliverable 2
+-- Mentorship Eligibility
+SELECT DISTINCT ON(e.emp_no) e.emp_no, 
+    e.first_name, 
+    e.last_name, 
+    e.birth_date,
+    de.from_date,
+    de.to_date,
+    ti.title
+INTO mentorship_eligibilty
+FROM employees as e
+Left outer Join dept_employees as de
+ON (e.emp_no = de.emp_no)
+Left outer Join titles as ti
+ON (e.emp_no = t.emp_no)
+WHERE (e.birth_date BETWEEN '1965-01-01' AND '1965-12-31')
+ORDER BY e.emp_no;
